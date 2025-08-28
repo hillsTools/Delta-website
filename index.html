@@ -13,6 +13,9 @@
             --primary: #3b82f6;
             --secondary: #8b5cf6;
             --accent: #06b6d4;
+            --dark-bg: #0f172a;
+            --darker-bg: #0a0e1a;
+            --card-bg: rgba(30, 41, 59, 0.4);
         }
         
         * {
@@ -23,9 +26,10 @@
         
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
             color: #e0e0e0;
             overflow-x: hidden;
+            min-height: 100vh;
         }
         
         .gradient-text {
@@ -42,8 +46,9 @@
         .card-hover {
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
         }
         
         .card-hover:hover {
@@ -120,74 +125,6 @@
             border-color: rgba(255, 255, 255, 0.4);
         }
         
-        .star-field {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 2s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        .download-section {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 1rem 0;
-        }
-        
-        .donation-card {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 1rem 0;
-        }
-        
-        .payment-option {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-        
-        .payment-option:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            background: rgba(59, 130, 246, 0.1);
-        }
-        
-        .payment-icon {
-            font-size: 1.5rem;
-            margin-right: 12px;
-            width: 30px;
-            text-align: center;
-        }
-        
-        .top-donator {
-            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
         .modal {
             display: none;
             position: fixed;
@@ -239,27 +176,6 @@
             color: #5865F2;
         }
         
-        .payment-methods {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-            justify-content: center;
-        }
-        
-        .payment-badge {
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 5px 12px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .payment-badge i {
-            margin-right: 5px;
-        }
-        
         .key-input {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
@@ -275,33 +191,6 @@
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-        
-        .glow-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glow-effect::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.1) 50%,
-                rgba(255,255,255,0) 100%
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
         }
         
         .typewriter {
@@ -323,13 +212,6 @@
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: var(--primary); }
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            pointer-events: none;
         }
         
         /* Page transitions */
@@ -382,17 +264,55 @@
             background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
         }
         
-        /* Holographic effect */
-        .holographic {
-            background: linear-gradient(45deg, 
-                rgba(59, 130, 246, 0.2), 
-                rgba(139, 92, 246, 0.2), 
-                rgba(6, 182, 212, 0.2));
+        /* Social media buttons */
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .discord-btn:hover {
+            background: #5865F2;
+            color: white;
+        }
+        
+        .youtube-btn:hover {
+            background: #FF0000;
+            color: white;
+        }
+        
+        .tiktok-btn:hover {
+            background: #000000;
+            color: white;
+        }
+        
+        /* Coming soon box */
+        .coming-soon {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
             position: relative;
             overflow: hidden;
         }
         
-        .holographic::before {
+        .coming-soon::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -402,17 +322,43 @@
             background: linear-gradient(
                 to bottom right,
                 rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.05) 50%,
+                rgba(255,255,255,0.1) 50%,
                 rgba(255,255,255,0) 100%
             );
             transform: rotate(30deg);
             animation: shine 6s infinite;
         }
+        
+        /* Canvas for moving lines */
+        #linesCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Loading animation */
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid var(--primary);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-    <div class="star-field" id="starField"></div>
-    <div id="particles-container"></div>
+    <canvas id="linesCanvas"></canvas>
     
     <!-- Header -->
     <header class="relative z-50">
@@ -425,7 +371,6 @@
                 <div class="flex items-center space-x-6">
                     <a id="nav-home" class="text-gray-300 hover:text-white transition-colors active-nav" onclick="navigate('home')">Home</a>
                     <a id="nav-downloads" class="text-gray-300 hover:text-white transition-colors" onclick="navigate('downloads')">Downloads</a>
-                    <a id="nav-donate" class="text-gray-300 hover:text-white transition-colors" onclick="navigate('donate')">Donate</a>
                     <a href="https://discord.gg/CnFpArQRYH" target="_blank" class="text-gray-300 hover:text-blue-400 transition-colors">
                         <i class="fab fa-discord text-xl"></i>
                     </a>
@@ -450,10 +395,6 @@
                     <button class="btn-primary" onclick="navigate('downloads')">
                         <i class="fas fa-download mr-2"></i>
                         Get Started
-                    </button>
-                    <button class="btn-secondary" onclick="navigate('donate')">
-                        <i class="fas fa-heart mr-2"></i>
-                        Support Us
                     </button>
                 </div>
             </div>
@@ -489,14 +430,14 @@
             </div>
         </section>
 
-        <!-- Top Donator Section -->
+        <!-- Coming Soon Section -->
         <section class="relative z-10 py-10">
             <div class="container mx-auto px-6">
-                <div class="top-donator pulse-animation">
-                    <i class="fas fa-crown text-3xl text-yellow-400 mb-2"></i>
-                    <h3 class="text-xl font-bold text-yellow-400 mb-1">Top Donator</h3>
-                    <p class="text-2xl font-bold text-white">CarterTooGood</p>
-                    <p class="text-gray-300">$10.00 - Thank you for your support!</p>
+                <div class="coming-soon card-hover">
+                    <i class="fas fa-desktop text-4xl gradient-text mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2 gradient-text">Delta PC Executor</h3>
+                    <p class="text-xl text-white mb-2">2025-2026</p>
+                    <p class="text-gray-300">The next generation of scripting is coming soon to PC</p>
                 </div>
             </div>
         </section>
@@ -510,14 +451,15 @@
                 <div class="grid md:grid-cols-2 gap-8">
                     
                     <!-- iOS Download -->
-                    <div class="download-section card-hover card-3d">
+                    <div class="card-hover card-3d p-6">
                         <div class="text-center">
                             <i class="fab fa-apple platform-icon ios-icon"></i>
                             <h3 class="text-2xl font-bold mb-4 text-white">iOS Version</h3>
                             <p class="text-gray-300 mb-6">Compatible with iOS 14.0 and above</p>
                             
                             <div id="iosKeyForm" class="mb-4">
-                                <input type="password" id="iosKeyInput" class="key-input" placeholder="Enter access key from Discord">
+                                <input type="text" id="iosDiscordId" class="key-input" placeholder="Enter your Discord ID">
+                                <input type="password" id="iosKeyInput" class="key-input" placeholder="Enter access key">
                                 <button class="btn-primary w-full" onclick="verifyKey('ios')">
                                     <i class="fas fa-key mr-2"></i>
                                     Verify Key
@@ -538,14 +480,15 @@
                     </div>
 
                     <!-- Android Download -->
-                    <div class="download-section card-hover card-3d">
+                    <div class="card-hover card-3d p-6">
                         <div class="text-center">
                             <i class="fab fa-android platform-icon android-icon"></i>
                             <h3 class="text-2xl font-bold mb-4 text-white">Android Version</h3>
                             <p class="text-gray-300 mb-6">Compatible with Android 7.0 and above</p>
                             
                             <div id="androidKeyForm" class="mb-4">
-                                <input type="password" id="androidKeyInput" class="key-input" placeholder="Enter access key from Discord">
+                                <input type="text" id="androidDiscordId" class="key-input" placeholder="Enter your Discord ID">
+                                <input type="password" id="androidKeyInput" class="key-input" placeholder="Enter access key">
                                 <button class="btn-primary w-full" onclick="verifyKey('android')">
                                     <i class="fas fa-key mr-2"></i>
                                     Verify Key
@@ -573,113 +516,34 @@
         </section>
     </div>
 
-    <!-- Donate Page -->
-    <div id="donate-page" class="page">
-        <section class="relative z-10 py-20">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl font-bold text-center mb-12 gradient-text font-orbitron">Support the Project</h2>
-                <p class="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
-                    Your support helps us maintain and improve Delta Executor. Please include your Discord username in payment notes.
-                </p>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    
-                    <!-- Raven Donations -->
-                    <div class="donation-card card-hover card-3d">
-                        <div class="text-center">
-                            <i class="fas fa-user-circle text-4xl text-blue-400 mb-4"></i>
-                            <h3 class="text-2xl font-bold mb-4 text-white">Donate to Raven</h3>
-                            <p class="text-gray-300 mb-6">Support the lead developer</p>
-                            <div class="space-y-3">
-                                <div class="payment-option" onclick="openDonationModal('raven', 'stripe')">
-                                    <div class="payment-icon">
-                                        <i class="fas fa-credit-card text-blue-400"></i>
-                                    </div>
-                                    <div>
-                                        <div>Stripe Payment</div>
-                                        <div class="text-xs text-gray-400 mt-1">Credit/Debit Cards & Apple Pay</div>
-                                    </div>
-                                </div>
-                                <div class="payment-option" onclick="openDonationModal('raven', 'paypal')">
-                                    <div class="payment-icon">
-                                        <i class="fab fa-paypal text-blue-600"></i>
-                                    </div>
-                                    <div>PayPal</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- KadejahD Donations -->
-                    <div class="donation-card card-hover card-3d">
-                        <div class="text-center">
-                            <i class="fas fa-user-circle text-4xl text-purple-400 mb-4"></i>
-                            <h3 class="text-2xl font-bold mb-4 text-white">Donate to runndwnking</h3>
-                            <p class="text-gray-300 mb-6">Support the project maintainer</p>
-                            <div class="space-y-3">
-                                <div class="payment-option" onclick="openDonationModal('runndwnking', 'cashapp')">
-                                    <div class="payment-icon">
-                                        <i class="fas fa-dollar-sign text-green-400"></i>
-                                    </div>
-                                    <div>CashApp</div>
-                                </div>
-                                <div class="payment-option" onclick="openDonationModal('runndwnking', 'paypal')">
-                                    <div class="payment-icon">
-                                        <i class="fab fa-paypal text-blue-600"></i>
-                                    </div>
-                                    <div>PayPal</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-8 text-center">
-                    <div class="payment-methods">
-                        <div class="payment-badge">
-                            <i class="fab fa-cc-visa"></i> Visa
-                        </div>
-                        <div class="payment-badge">
-                            <i class="fab fa-cc-mastercard"></i> Mastercard
-                        </div>
-                        <div class="payment-badge">
-                            <i class="fab fa-cc-amex"></i> Amex
-                        </div>
-                        <div class="payment-badge">
-                            <i class="fab fa-paypal"></i> PayPal
-                        </div>
-                        <div class="payment-badge">
-                            <i class="fas fa-dollar-sign"></i> CashApp
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
     <!-- Footer -->
-    <footer class="relative z-10 py-10 border-t border-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400 mb-4">© 2024 Delta Executor. All rights reserved.</p>
-            <div class="flex justify-center space-x-6">
-                <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
-                <a href="https://discord.gg/CnFpArQRYH" target="_blank" class="text-gray-400 hover:text-blue-400 transition-colors">
-                    <i class="fab fa-discord"></i>
-                </a>
+    <footer class="relative z-10 py-10 border-t border-gray-800 mt-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">© 2024 Delta Executor. All rights reserved.</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://discord.gg/CnFpArQRYH" target="_blank" class="social-btn discord-btn">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-btn youtube-btn">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-btn tiktok-btn">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <span class="text-gray-600 mx-2">•</span>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
-
-    <!-- Donation Modal -->
-    <div id="donationModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeDonationModal()">&times;</span>
-            <div id="modalContent">
-                <!-- Dynamic content will be inserted here -->
-            </div>
-        </div>
-    </div>
 
     <!-- Key Modal -->
     <div id="keyModal" class="modal">
@@ -698,64 +562,204 @@
         </div>
     </div>
 
+    <!-- Discord Verification Modal -->
+    <div id="discordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDiscordModal()">&times;</span>
+            <div class="text-center">
+                <i class="fab fa-discord text-4xl text-blue-400 mb-4"></i>
+                <h3 class="text-2xl font-bold mb-4 text-white">Discord Verification Required</h3>
+                <p class="text-gray-300 mb-6" id="discordModalMessage">Your Discord ID was not found in our server.</p>
+                <a href="https://discord.gg/CnFpArQRYH" target="_blank" class="btn-primary inline-block mb-4">
+                    <i class="fab fa-discord mr-2"></i>
+                    Join Our Server
+                </a>
+                <p class="text-sm text-gray-400">After joining, please try again</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal">
+        <div class="modal-content">
+            <div class="text-center">
+                <div class="loader mb-4"></div>
+                <h3 class="text-2xl font-bold mb-4 text-white">Verifying Discord ID</h3>
+                <p class="text-gray-300">Please wait while we check our server...</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Create star field
-        function createStarField() {
-            const starField = document.getElementById('starField');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = Math.random() * 3 + 1 + 'px';
-                star.style.height = star.style.width;
-                star.style.animationDelay = Math.random() * 2 + 's';
-                starField.appendChild(star);
+        // Moving lines background
+        const canvas = document.getElementById('linesCanvas');
+        const ctx = canvas.getContext('2d');
+        let dots = [];
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initDots();
+        }
+        
+        function initDots() {
+            dots = [];
+            const dotCount = Math.floor((canvas.width * canvas.height) / 15000);
+            
+            for (let i = 0; i < dotCount; i++) {
+                dots.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    color: `rgba(59, 130, 246, ${Math.random() * 0.4 + 0.1})`,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
             }
         }
-
-        // Create particles
-        function createParticles() {
-            const container = document.getElementById('particles-container');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 5 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                particle.style.animation = `float ${Math.random() * 10 + 5}s linear infinite`;
-                container.appendChild(particle);
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections
+            for (let i = 0; i < dots.length; i++) {
+                for (let j = i + 1; j < dots.length; j++) {
+                    const dx = dots[i].x - dots[j].x;
+                    const dy = dots[i].y - dots[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // Mouse influence
+                    const mouseDx = dots[i].x - mouseX;
+                    const mouseDy = dots[i].y - mouseY;
+                    const mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+                    
+                    if (dist < 150 || mouseDist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - dist/150})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(dots[i].x, dots[i].y);
+                        ctx.lineTo(dots[j].x, dots[j].y);
+                        ctx.stroke();
+                    }
+                }
             }
+            
+            // Draw dots
+            dots.forEach(dot => {
+                // Mouse influence
+                const dx = dot.x - mouseX;
+                const dy = dot.y - mouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 100) {
+                    dot.x += dx * 0.02 / dist;
+                    dot.y += dy * 0.02 / dist;
+                } else {
+                    // Move dot normally
+                    dot.x += dot.vx;
+                    dot.y += dot.vy;
+                    
+                    // Bounce off walls
+                    if (dot.x < 0 || dot.x > canvas.width) dot.vx *= -1;
+                    if (dot.y < 0 || dot.y > canvas.height) dot.vy *= -1;
+                }
+                
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
+                ctx.fillStyle = dot.color;
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(draw);
         }
-
+        
+        // Track mouse movement
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        // Initialize canvas
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        draw();
+        
         // Track downloads
         function trackDownload(type) {
             console.log(`Download tracked: ${type}`);
             // Here you would typically send this to your analytics
         }
-
-        // Verify key
-        function verifyKey(platform) {
+        
+        // Verify key with Discord ID check
+        async function verifyKey(platform) {
+            const discordIdInput = platform === 'ios' ? 
+                document.getElementById('iosDiscordId') : 
+                document.getElementById('androidDiscordId');
+                
+            const keyInput = platform === 'ios' ? 
+                document.getElementById('iosKeyInput') : 
+                document.getElementById('androidKeyInput');
+                
             const correctKey = "Newdeltainstallsynth2025";
-            const inputElement = platform === 'ios' ? document.getElementById('iosKeyInput') : document.getElementById('androidKeyInput');
-            const downloadsElement = platform === 'ios' ? document.getElementById('iosDownloads') : document.getElementById('androidDownloads');
+            const downloadsElement = platform === 'ios' ? 
+                document.getElementById('iosDownloads') : 
+                document.getElementById('androidDownloads');
             
-            if (inputElement.value === correctKey) {
-                downloadsElement.classList.remove('hidden');
-                inputElement.value = '';
-                createConfetti();
-            } else {
-                alert('Invalid key! Please join our Discord server to get the correct key.');
-                openKeyModal();
+            // Validate Discord ID format (basic check)
+            const discordId = discordIdInput.value.trim();
+            if (!discordId || discordId.length < 2) {
+                alert('Please enter a valid Discord ID');
+                return;
+            }
+            
+            // Show loading modal
+            document.getElementById('loadingModal').style.display = 'block';
+            
+            try {
+                // In a real implementation, you would call your backend API here
+                // This is a mock implementation
+                const isInServer = await checkDiscordServerMembership(discordId);
+                
+                if (isInServer && keyInput.value === correctKey) {
+                    downloadsElement.classList.remove('hidden');
+                    keyInput.value = '';
+                    discordIdInput.value = '';
+                    createConfetti();
+                } else if (!isInServer) {
+                    showDiscordModal('Your Discord ID was not found in our server. Please join and try again.');
+                } else {
+                    alert('Invalid key! Please join our Discord server to get the correct key.');
+                    openKeyModal();
+                }
+            } catch (error) {
+                console.error('Error verifying Discord ID:', error);
+                alert('Error verifying Discord ID. Please try again later.');
+            } finally {
+                // Hide loading modal
+                document.getElementById('loadingModal').style.display = 'none';
             }
         }
-
+        
+        // Mock function to check Discord server membership
+        // In a real implementation, this would call your backend API
+        async function checkDiscordServerMembership(discordId) {
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // For demo purposes, let's assume these IDs are in the server
+            const knownIds = ['user123', 'user456', 'deltafan', 'scriptuser'];
+            
+            // In reality, you would have a proper check against Discord API
+            // This is just a simulation
+            return knownIds.includes(discordId.toLowerCase());
+        }
+        
         // Create confetti effect
         function createConfetti() {
             const colors = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b'];
-            const container = document.getElementById('particles-container');
+            const container = document.body;
             
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
@@ -763,9 +767,11 @@
                 confetti.style.width = Math.random() * 10 + 5 + 'px';
                 confetti.style.height = confetti.style.width;
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.position = 'fixed';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.top = '-20px';
                 confetti.style.borderRadius = '0';
+                confetti.style.zIndex = '1000';
                 
                 const animationDuration = Math.random() * 3 + 2;
                 confetti.style.animation = `fall ${animationDuration}s linear forwards`;
@@ -789,7 +795,7 @@
             `;
             document.head.appendChild(style);
         }
-
+        
         // Navigation functions
         function navigate(page) {
             // Hide all pages
@@ -809,125 +815,41 @@
             // Scroll to top
             window.scrollTo(0, 0);
         }
-
-        // Donation modal functions
-        function openDonationModal(person, method) {
-            const modal = document.getElementById('donationModal');
-            const modalContent = document.getElementById('modalContent');
-            
-            let content = '';
-            
-            if (person === 'raven') {
-                if (method === 'stripe') {
-                    content = `
-                        <h3 class="text-2xl font-bold mb-4 gradient-text">Donate to Raven</h3>
-                        <p class="text-gray-300 mb-6">Support Raven with Stripe (accepts Apple Pay)</p>
-                        
-                        <div class="text-center mb-6">
-                            <a href="https://buy.stripe.com/aFa3cwa71bsX2zA92E43S01" target="_blank" class="btn-primary inline-block">
-                                <i class="fas fa-external-link-alt mr-2"></i>
-                                Open Stripe Payment
-                            </a>
-                        </div>
-                        
-                        <div class="text-sm text-gray-400">
-                            <p><i class="fas fa-info-circle mr-2"></i> Please include your Discord username in payment notes</p>
-                            <p><i class="fas fa-apple mr-2"></i> Apple Pay available during checkout</p>
-                        </div>
-                    `;
-                } else if (method === 'paypal') {
-                    content = `
-                        <h3 class="text-2xl font-bold mb-4 gradient-text">Donate to Raven via PayPal</h3>
-                        <p class="text-gray-300 mb-6">Send to: Jacobmoreno6541@gmail.com</p>
-                        
-                        <div class="bg-gray-800 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-gray-400 mb-1">Important:</p>
-                            <p class="text-white">Please include your Discord username in the payment note</p>
-                        </div>
-                        
-                        <a href="https://paypal.me/Jacobmoreno6541" target="_blank" class="btn-primary w-full block text-center">
-                            <i class="fab fa-paypal mr-2"></i>
-                            Open PayPal
-                        </a>
-                    `;
-                }
-            } else if (person === 'runndwnking') {
-                if (method === 'cashapp') {
-                    content = `
-                        <h3 class="text-2xl font-bold mb-4 gradient-text">Donate to runndwnking via CashApp</h3>
-                        <p class="text-gray-300 mb-6">Send to: $GuardianzRose</p>
-                        
-                        <div class="bg-gray-800 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-gray-400 mb-1">Important:</p>
-                            <p class="text-white">Please include your Discord username in the payment note</p>
-                        </div>
-                        
-                        <button class="btn-primary w-full" onclick="processCashApp('kadejahd')">
-                            <i class="fas fa-dollar-sign mr-2"></i>
-                            Open CashApp
-                        </button>
-                    `;
-                } else if (method === 'paypal') {
-                    content = `
-                        <h3 class="text-2xl font-bold mb-4 gradient-text">Donate to runndwnking via PayPal</h3>
-                        <p class="text-gray-300 mb-6">Send to: KadejahD</p>
-                        
-                        <div class="bg-gray-800 p-4 rounded-lg mb-4">
-                            <p class="text-sm text-gray-400 mb-1">Important:</p>
-                            <p class="text-white">Please include your Discord username in the payment note</p>
-                        </div>
-                        
-                        <a href="https://paypal.me/KadejahD" target="_blank" class="btn-primary w-full block text-center">
-                            <i class="fab fa-paypal mr-2"></i>
-                            Open PayPal
-                        </a>
-                    `;
-                }
-            }
-            
-            modalContent.innerHTML = content;
-            modal.style.display = 'block';
-        }
-
-        function closeDonationModal() {
-            document.getElementById('donationModal').style.display = 'none';
-        }
-
+        
         function openKeyModal() {
             document.getElementById('keyModal').style.display = 'block';
         }
-
+        
         function closeKeyModal() {
             document.getElementById('keyModal').style.display = 'none';
         }
-
-        // Payment processing functions
-        function processCashApp(person) {
-            // Try to deep link to CashApp
-            const tag = person === 'runndwnking' ? '$GuardianzRose' : '$GuardianzRose';
-            window.location.href = `cash.app://${tag}`;
-            // Fallback to web if app not installed
-            setTimeout(() => {
-                window.location.href = `https://cash.app/${tag}`;
-            }, 500);
+        
+        function showDiscordModal(message) {
+            document.getElementById('discordModalMessage').textContent = message;
+            document.getElementById('discordModal').style.display = 'block';
         }
-
+        
+        function closeDiscordModal() {
+            document.getElementById('discordModal').style.display = 'none';
+        }
+        
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('donationModal');
             const keyModal = document.getElementById('keyModal');
-            if (event.target === modal) {
-                closeDonationModal();
-            }
+            const discordModal = document.getElementById('discordModal');
+            const loadingModal = document.getElementById('loadingModal');
+            
             if (event.target === keyModal) {
                 closeKeyModal();
             }
+            if (event.target === discordModal) {
+                closeDiscordModal();
+            }
+            if (event.target === loadingModal) {
+                // Don't close loading modal by clicking outside
+            }
         }
-
-        // Initialize effects
-        createStarField();
-        createParticles();
-
+        
         // Add smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -937,13 +859,6 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        // Add parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const starField = document.getElementById('starField');
-            starField.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
 </body>
