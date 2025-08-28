@@ -339,22 +339,6 @@
             z-index: -1;
             pointer-events: none;
         }
-        
-        /* Loading animation */
-        .loader {
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top: 3px solid var(--primary);
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -458,7 +442,6 @@
                             <p class="text-gray-300 mb-6">Compatible with iOS 14.0 and above</p>
                             
                             <div id="iosKeyForm" class="mb-4">
-                                <input type="text" id="iosDiscordId" class="key-input" placeholder="Enter your Discord ID">
                                 <input type="password" id="iosKeyInput" class="key-input" placeholder="Enter access key">
                                 <button class="btn-primary w-full" onclick="verifyKey('ios')">
                                     <i class="fas fa-key mr-2"></i>
@@ -487,7 +470,6 @@
                             <p class="text-gray-300 mb-6">Compatible with Android 7.0 and above</p>
                             
                             <div id="androidKeyForm" class="mb-4">
-                                <input type="text" id="androidDiscordId" class="key-input" placeholder="Enter your Discord ID">
                                 <input type="password" id="androidKeyInput" class="key-input" placeholder="Enter access key">
                                 <button class="btn-primary w-full" onclick="verifyKey('android')">
                                     <i class="fas fa-key mr-2"></i>
@@ -558,34 +540,6 @@
                     Join Discord
                 </a>
                 <p class="text-sm text-gray-400">The key is posted in the #downloads channel</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Discord Verification Modal -->
-    <div id="discordModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeDiscordModal()">&times;</span>
-            <div class="text-center">
-                <i class="fab fa-discord text-4xl text-blue-400 mb-4"></i>
-                <h3 class="text-2xl font-bold mb-4 text-white">Discord Verification Required</h3>
-                <p class="text-gray-300 mb-6" id="discordModalMessage">Your Discord ID was not found in our server.</p>
-                <a href="https://discord.gg/CnFpArQRYH" target="_blank" class="btn-primary inline-block mb-4">
-                    <i class="fab fa-discord mr-2"></i>
-                    Join Our Server
-                </a>
-                <p class="text-sm text-gray-400">After joining, please try again</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal">
-        <div class="modal-content">
-            <div class="text-center">
-                <div class="loader mb-4"></div>
-                <h3 class="text-2xl font-bold mb-4 text-white">Verifying Discord ID</h3>
-                <p class="text-gray-300">Please wait while we check our server...</p>
             </div>
         </div>
     </div>
@@ -692,68 +646,20 @@
             // Here you would typically send this to your analytics
         }
         
-        // Verify key with Discord ID check
-        async function verifyKey(platform) {
-            const discordIdInput = platform === 'ios' ? 
-                document.getElementById('iosDiscordId') : 
-                document.getElementById('androidDiscordId');
-                
-            const keyInput = platform === 'ios' ? 
-                document.getElementById('iosKeyInput') : 
-                document.getElementById('androidKeyInput');
-                
+        // Verify key
+        function verifyKey(platform) {
             const correctKey = "Newdeltainstallsynth2025";
-            const downloadsElement = platform === 'ios' ? 
-                document.getElementById('iosDownloads') : 
-                document.getElementById('androidDownloads');
+            const inputElement = platform === 'ios' ? document.getElementById('iosKeyInput') : document.getElementById('androidKeyInput');
+            const downloadsElement = platform === 'ios' ? document.getElementById('iosDownloads') : document.getElementById('androidDownloads');
             
-            // Validate Discord ID format (basic check)
-            const discordId = discordIdInput.value.trim();
-            if (!discordId || discordId.length < 2) {
-                alert('Please enter a valid Discord ID');
-                return;
+            if (inputElement.value === correctKey) {
+                downloadsElement.classList.remove('hidden');
+                inputElement.value = '';
+                createConfetti();
+            } else {
+                alert('Invalid key! Please join our Discord server to get the correct key.');
+                openKeyModal();
             }
-            
-            // Show loading modal
-            document.getElementById('loadingModal').style.display = 'block';
-            
-            try {
-                // In a real implementation, you would call your backend API here
-                // This is a mock implementation
-                const isInServer = await checkDiscordServerMembership(discordId);
-                
-                if (isInServer && keyInput.value === correctKey) {
-                    downloadsElement.classList.remove('hidden');
-                    keyInput.value = '';
-                    discordIdInput.value = '';
-                    createConfetti();
-                } else if (!isInServer) {
-                    showDiscordModal('Your Discord ID was not found in our server. Please join and try again.');
-                } else {
-                    alert('Invalid key! Please join our Discord server to get the correct key.');
-                    openKeyModal();
-                }
-            } catch (error) {
-                console.error('Error verifying Discord ID:', error);
-                alert('Error verifying Discord ID. Please try again later.');
-            } finally {
-                // Hide loading modal
-                document.getElementById('loadingModal').style.display = 'none';
-            }
-        }
-        
-        // Mock function to check Discord server membership
-        // In a real implementation, this would call your backend API
-        async function checkDiscordServerMembership(discordId) {
-            // Simulate API call delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // For demo purposes, let's assume these IDs are in the server
-            const knownIds = ['user123', 'user456', 'deltafan', 'scriptuser'];
-            
-            // In reality, you would have a proper check against Discord API
-            // This is just a simulation
-            return knownIds.includes(discordId.toLowerCase());
         }
         
         // Create confetti effect
@@ -824,29 +730,11 @@
             document.getElementById('keyModal').style.display = 'none';
         }
         
-        function showDiscordModal(message) {
-            document.getElementById('discordModalMessage').textContent = message;
-            document.getElementById('discordModal').style.display = 'block';
-        }
-        
-        function closeDiscordModal() {
-            document.getElementById('discordModal').style.display = 'none';
-        }
-        
         // Close modal when clicking outside
         window.onclick = function(event) {
             const keyModal = document.getElementById('keyModal');
-            const discordModal = document.getElementById('discordModal');
-            const loadingModal = document.getElementById('loadingModal');
-            
             if (event.target === keyModal) {
                 closeKeyModal();
-            }
-            if (event.target === discordModal) {
-                closeDiscordModal();
-            }
-            if (event.target === loadingModal) {
-                // Don't close loading modal by clicking outside
             }
         }
         
